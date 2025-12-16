@@ -1,0 +1,75 @@
+[gd_scene load_steps=8 format=3 uid="uid://brrx7x2jjsn7s"]
+
+[ext_resource type="Script" uid="uid://ba8rus1hpteg4" path="res://Scripts/Local/main.gd" id="1_jjgbg"]
+[ext_resource type="Script" uid="uid://cn538713mhwf3" path="res://Scripts/Local/goldLabel.gd" id="2_bo1nx"]
+[ext_resource type="Script" uid="uid://pqwir40hrckr" path="res://Scripts/Local/hud.gd" id="2_jjvhh"]
+[ext_resource type="Script" uid="uid://bkhsxb4cscflc" path="res://Scripts/Local/buyBank.gd" id="3_8gbba"]
+[ext_resource type="FontFile" uid="uid://cux23vc54vwy0" path="res://Assets/Fonts/Space Mono/SpaceMonoNerdFontMono-Regular.ttf" id="4_kry3j"]
+[ext_resource type="Script" uid="uid://doep1cg7dt7ml" path="res://Scripts/Local/soulLabel.gd" id="6_21xkr"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_21xkr"]
+font = ExtResource("4_kry3j")
+font_size = 42
+font_color = Color(1, 0.79607844, 0, 1)
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_jjgbg")
+
+[node name="gameTick" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[node name="hud" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_jjvhh")
+
+[node name="buyBank" type="Button" parent="hud"]
+layout_mode = 0
+offset_left = 285.0
+offset_top = 232.0
+offset_right = 589.0
+offset_bottom = 329.0
+text = "Buy Bank"
+script = ExtResource("3_8gbba")
+
+[node name="topBar" type="Panel" parent="hud"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 100.0
+grow_horizontal = 2
+
+[node name="goldLabel" type="Label" parent="hud/topBar"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -129.0
+offset_bottom = 100.0
+grow_horizontal = 0
+text = " 100"
+label_settings = SubResource("LabelSettings_21xkr")
+horizontal_alignment = 2
+vertical_alignment = 1
+script = ExtResource("2_bo1nx")
+
+[node name="soulLabel" type="Label" parent="hud/topBar"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -466.0
+offset_right = -264.5
+offset_bottom = 100.0
+grow_horizontal = 0
+script = ExtResource("6_21xkr")
+
+[connection signal="timeout" from="gameTick" to="." method="_on_game_tick_timeout"]
+[connection signal="pressed" from="hud/buyBank" to="hud/buyBank" method="_on_pressed"]
