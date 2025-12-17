@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://ba8rus1hpteg4" path="res://Scripts/Local/main.gd" id="1_jjgbg"]
 [ext_resource type="Script" uid="uid://cn538713mhwf3" path="res://Scripts/Local/goldLabel.gd" id="2_bo1nx"]
 [ext_resource type="Script" uid="uid://pqwir40hrckr" path="res://Scripts/Local/hud.gd" id="2_jjvhh"]
-[ext_resource type="Script" uid="uid://bkhsxb4cscflc" path="res://Scripts/Local/buyBank.gd" id="3_8gbba"]
+[ext_resource type="Script" uid="uid://bkhsxb4cscflc" path="res://Scripts/Local/buyBuilding.gd" id="3_8gbba"]
 [ext_resource type="FontFile" uid="uid://cux23vc54vwy0" path="res://Assets/Fonts/Space Mono/SpaceMonoNerdFontMono-Regular.ttf" id="4_kry3j"]
 [ext_resource type="Script" uid="uid://doep1cg7dt7ml" path="res://Scripts/Local/soulLabel.gd" id="6_21xkr"]
 
@@ -29,15 +29,6 @@ offset_bottom = 1080.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_jjvhh")
-
-[node name="buyBank" type="Button" parent="hud"]
-layout_mode = 0
-offset_left = 285.0
-offset_top = 232.0
-offset_right = 589.0
-offset_bottom = 329.0
-text = "Buy Bank"
-script = ExtResource("3_8gbba")
 
 [node name="topBar" type="Panel" parent="hud"]
 layout_mode = 1
@@ -71,5 +62,33 @@ offset_bottom = 100.0
 grow_horizontal = 0
 script = ExtResource("6_21xkr")
 
+[node name="buildingsBar" type="Panel" parent="hud"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -346.0
+offset_top = 97.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="buyBank" type="Button" parent="hud/buildingsBar"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -152.0
+offset_top = -48.5
+offset_right = 152.0
+offset_bottom = 48.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Buy Bank: 100"
+script = ExtResource("3_8gbba")
+metadata/buildingType = "Bank"
+
 [connection signal="timeout" from="gameTick" to="." method="_on_game_tick_timeout"]
-[connection signal="pressed" from="hud/buyBank" to="hud/buyBank" method="_on_pressed"]
+[connection signal="pressed" from="hud/buildingsBar/buyBank" to="hud/buildingsBar/buyBank" method="_on_pressed"]
